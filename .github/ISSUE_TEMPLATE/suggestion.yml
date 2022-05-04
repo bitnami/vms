@@ -1,0 +1,24 @@
+name: 💡 Suggestion
+description: Suggesst us how to improvie
+labels: ["suggestion", "triage"]
+body:
+  - type: markdown
+    id: introduction
+    attributes:
+      value: |
+        Thank you for reporting a suggestion, we really appreciate your feedback!
+  - type: input
+    id: title
+    attributes:
+      label: Name of the application
+      description: Name of the affected application
+      placeholder: wordpress
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe your issue as much as you can
+      description: Please add any extra deailed information you can provide us.
+    validations:
+      required: true
