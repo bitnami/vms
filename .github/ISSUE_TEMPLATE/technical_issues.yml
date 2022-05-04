@@ -32,7 +32,6 @@ body:
         - Virtual Machine
         - OSX VM
         - Installers
-        - Virtual Machine
     validations:
       required: true
   - type: input
