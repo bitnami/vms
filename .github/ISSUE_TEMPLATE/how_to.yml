@@ -1,6 +1,7 @@
 name: 📚 How to
 description: How to issue
 labels: ["how to", "triage"]
+title: "[<application>] <title>"
 body:
   - type: markdown
     id: introduction
@@ -9,15 +10,10 @@ body:
         Thank you for reporting an issue. Before you open the how to issue report please:
           - Look for your issue in the [resolved ones](https://github.com/bitnami/vms/issues?q=is%3Aissue+is%3Aclosed), maybe we solved similar issues before.
           - If you didn't find in the resolved ones, we suggest you to look on the [on going ones](https://github.com/bitnami/vms/issues).
+        
         If that information didn't help you, please fill in as much of the following form as you are able.
-  - type: input
-    id: title
-    attributes:
-      label: Name of the application
-      description: Name of the affected application
-      placeholder: wordpress
-    validations:
-      required: true
+        
+        Please ensure the ticket title contains the proper application name (ex: [wordpress] Your title here).
   - type: textarea
     id: description
     attributes:

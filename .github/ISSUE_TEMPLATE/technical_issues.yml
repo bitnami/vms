@@ -1,6 +1,7 @@
 name: 🔧 Technical issue
 description: Create a report to help you
 labels: ["tech issues", "triage"]
+title: "[<application>] <title>"
 body:
   - type: markdown
     id: introduction
@@ -9,15 +10,10 @@ body:
         Thank you for reporting an issue. Before you open the technical issue report please:
           - Look for your issue in the [resolved ones](https://github.com/bitnami/vms/issues?q=is%3Aissue+is%3Aclosed), maybe we solved similar issues before.
           - If you didn't find in the resolved ones, we suggest you to look on the [on going ones](https://github.com/bitnami/vms/issues).
-        If that information didn't help you, please fill in as much of the following form as you are able.
-  - type: input
-    id: title
-    attributes:
-      label: Name of the application
-      description: Name of the affected application
-      placeholder: wordpress
-    validations:
-      required: true
+        
+        If that information didn't help you, please fill in as much of the following form as you are able (and ensure you have your [bndiagnostic ID](https://docs.bitnami.com/general/how-to/understand-bndiagnostic/)).
+        
+        Please ensure the ticket title contains the proper application name (ex: [wordpress] Your title here).
   - type: dropdown
     id: platform
     attributes:
@@ -28,7 +24,6 @@ body:
         - AWS
         - Azure
         - VMware Marketplace
-        - Bitnami Cloud Hosting
         - Virtual Machine
         - OSX VM
         - Installers
@@ -37,7 +32,7 @@ body:
   - type: input
     id: bndiagnosticID
     attributes:
-      label: bndiagnostic ID
+      label: bndiagnostic ID [know more about bndiagnostic ID](https://docs.bitnami.com/general/how-to/understand-bndiagnostic/)
       placeholder: ex. 849fabe0-d11f-11cb-4a34-e4ec5361be461
     validations:
       required: true
@@ -57,7 +52,7 @@ body:
   - type: input
     id: bndiagnosticReason
     attributes:
-      label: bndiagnostic failure reason
+      label: bndiagnostic was not useful. Could you please tell us why?
       placeholder: ex. The suggested guides are not related with my issue
     validations:
       required: true
