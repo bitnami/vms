@@ -1,4 +1,4 @@
-# The Bitnami VMs   
+# Bitnami Application Catalog VMs  
 
 [Popular applications](https://bitnami.com/stacks), provided by [Bitnami](https://bitnami.com), ready to launch on:
 * [VMware Marketplace](https://marketplace.cloud.vmware.com/)
