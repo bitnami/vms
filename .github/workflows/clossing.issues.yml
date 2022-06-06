@@ -2,7 +2,7 @@ name: 'Close Solved issues'
 on:
   schedule:
     # Hourly
-    - cron: '*/15 * * * *'
+    - cron: '0 * * * *'
 
 permissions:
   issues: write
