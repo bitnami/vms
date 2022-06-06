@@ -1,6 +1,6 @@
 name: 🔧 Technical issue
 description: Create a report to help you
-labels: ["tech issues"]
+labels: ["tech-issues"]
 title: "[<application>] <title>"
 body:
   - type: markdown
