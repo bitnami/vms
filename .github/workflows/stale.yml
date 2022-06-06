@@ -19,28 +19,3 @@ jobs:
           exempt-issue-labels: 'on-hold'
           exempt-pr-labels: 'on-hold'
           operations-per-run: 500
-    autoarchive-cards-job:
-      runs-on: ubuntu-latest
-      name: Autoarchive Done Column Cards
-      steps:
-        # - name: Checkout
-        #  uses: actions/checkout@v2
-        - name: The autoarchive action
-          uses: kin/gh-action-autoarchive-stale-cards-for-column@v1.0
-          id: archive
-          with:
-            # Required: personal access token with permissions to archive cards
-            access-token: "${{ secrets.GITHUB_TOKEN }}"
-            # Required: String with repo name (e.g. 'kin/gh-action-autoarchive-issues-for-column' should be 'gh-action-autoarchive-issues-for-column' here)
-            repository: 'my-repo-name'
-            # Required: String with owner name only (e.g. 'kin/gh-action-autoarchive-issues-for-column' should be 'kin' here)
-            repository-owner: 'the-owner'
-
-            # Required: String with name of project the column is in (case insensitive)
-            project-name: 'My Project'
-
-            # Required: String with column name for (case insensitive)
-            column-to-archive: 'Done'
-
-            # Required: Integer for how many days must have elapsed since the last time this card was touched
-            days-old: 5

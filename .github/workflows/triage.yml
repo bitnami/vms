@@ -1,0 +1,29 @@
+# This workflow is built to manage the triage support by using GH issues.
+
+name: Organize triage
+on:
+  issues:
+    types:
+      - reopened
+      - opened
+permissions:
+  repository-projects: write
+  issues: write
+jobs:
+  # For any opened or reopened issue, should be sent into Triage
+  send_to_triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send to triage
+        uses: peter-evans/create-or-update-project-card@v2
+        with:
+          project-name: Support
+          column-name: Triage
+          token: "${{ secrets.GHPROJECT_TOKEN }}"
+      - name: Assign person for the triage
+        uses: pozil/auto-assign-issue@v1.6.3
+        with:
+          numOfAssignee: 1
+          assignees: 'jotamartos,mdhont'
+          # teams: XXX
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
