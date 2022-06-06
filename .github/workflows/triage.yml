@@ -25,6 +25,6 @@ jobs:
         with:
           numOfAssignee: 1
           assignees: 'jotamartos,mdhont'
-          removePreviousAssignees: false
+          removePreviousAssignees: true
           # teams: XXX
           repo-token: "${{ secrets.GITHUB_TOKEN }}"

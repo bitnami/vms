@@ -1,6 +1,6 @@
 name: 📚 How to
 description: How to issue
-labels: ["how to", "triage"]
+labels: ["how to"]
 title: "[<application>] <title>"
 body:
   - type: markdown

@@ -1,6 +1,6 @@
 name: 💡 Suggestion
 description: Suggesst us how to improvie
-labels: ["suggestion", "triage"]
+labels: ["suggestion"]
 title: "[<application>] <title>"
 body:
   - type: markdown
