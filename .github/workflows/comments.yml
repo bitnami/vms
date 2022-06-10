@@ -32,7 +32,6 @@ jobs:
       - name: Move into Triage
         uses: peter-evans/create-or-update-project-card@v2
         if: ${{ contains(github.event.issue.labels.*.name, 'triage') && (!contains(fromJson(env.SUPPORT_TEAM), github.event.comment.user.login)) }}
-        run: echo "Without triage by a non teammember"
         with:
           project-name: Support
           column-name: Triage
