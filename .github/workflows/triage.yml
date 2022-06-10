@@ -28,3 +28,8 @@ jobs:
           removePreviousAssignees: true
           # teams: XXX
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Triage labeling
+        # Only if moved into Solved
+        uses: andymckay/labeler@1.0.4
+        with:
+          add-labels: "triage"

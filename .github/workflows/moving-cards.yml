@@ -22,21 +22,22 @@ jobs:
         if: ${{ github.event.project_card.column_id == env.ON_HOLD_COLUMN_ID  }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: "on hold"
+          add-labels: "on-hold"
+          remove-labels: "triage"
       - name: In progress labeling
         # Only if moved into In progress
         if: ${{ github.event.project_card.column_id == env.IN_PROGRESS_COLUMN_ID  }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: "in progress"
-          remove-labels: "on hold"
+          add-labels: "in-progress"
+          remove-labels: "on-hold, triage"
       - name: Solved labeling
         # Only if moved into Solved
         if: ${{ github.event.project_card.column_id == env.SOLVED_COLUMN_ID  }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: "solved"
-          remove-labels: "in progress, on hold"
+          remove-labels: "in-progress, on-hold, triage"
   assign-assignee-if-needed:
     runs-on: ubuntu-latest
     steps:

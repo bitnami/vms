@@ -1,0 +1,39 @@
+name: Organizing cards based on comments
+on:
+  issue_comment:
+    types:
+      - created
+permissions:
+  repository-projects: write
+  issues: write
+
+env:
+  # It's needed in this format to be converted into JSON
+  SUPPORT_TEAM: '["agomezmoron","jotamartos","alemorcuq","carrodher","github-actions","dgomezleon","fmulero","FraPazGal","gongomgra","joancafom","marcosbc","Mauraza","mdhont","migruiz4","rafariossaa","superaleks"]'
+
+jobs:
+  comments_handler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move into Pending
+        uses: peter-evans/create-or-update-project-card@v2
+        if: ${{ contains(fromJson(env.SUPPORT_TEAM), github.event.comment.user.login) }}
+        with:
+          project-name: Support
+          column-name: Pending
+          token: "${{ secrets.GHPROJECT_TOKEN }}"
+      - name: Move into In Progress
+        uses: peter-evans/create-or-update-project-card@v2
+        if: ${{ contains(github.event.issue.labels.*.name, 'in-progress') && (!contains(fromJson(env.SUPPORT_TEAM), github.event.comment.user.login)) }}
+        with:
+          project-name: Support
+          column-name: In progress
+          token: "${{ secrets.GHPROJECT_TOKEN }}"
+      - name: Move into Triage
+        uses: peter-evans/create-or-update-project-card@v2
+        if: ${{ contains(github.event.issue.labels.*.name, 'triage') && (!contains(fromJson(env.SUPPORT_TEAM), github.event.comment.user.login)) }}
+        run: echo "Without triage by a non teammember"
+        with:
+          project-name: Support
+          column-name: Triage
+          token: "${{ secrets.GHPROJECT_TOKEN }}"
