@@ -1,5 +1,5 @@
 name: 💡 Suggestion
-description: Suggesst us how to improvie
+description: Suggest us how to improve
 labels: ["suggestion"]
 title: "[<application>] <title>"
 body:
@@ -13,7 +13,7 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Describe your issue as much as you can
+      label: Describe your suggestion as much as you can
       description: Please add any extra deailed information you can provide us.
     validations:
       required: true
