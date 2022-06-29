@@ -1,22 +1,18 @@
-# This workflow is built to manage the triage support by using GH issues.
-
-name: Organize triage
+name: 'Move closed issues'
 on:
   issues:
     types:
-      - reopened
-      - opened
+      - closed
   pull_request_target:
     types:
-      - reopened
-      - opened
+      - closed
+
 permissions:
-  repository-projects: write
   issues: write
+  repository-projects: write
 
 jobs:
-  # For any opened or reopened issue, should be sent into Triage
-  send_to_board:
+  send_to_solved:
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
@@ -27,16 +23,26 @@ jobs:
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
-      - name: Send to the solved board
+      - name: Preparing string variables
+        run: |
+          TRIAGE_TEAM_STRING=${TRIAGE_TEAM/[/}
+          TRIAGE_TEAM_STRING=${TRIAGE_TEAM_STRING/]/}
+          TRIAGE_TEAM_STRING=${TRIAGE_TEAM_STRING//'"'/}
+          # creating env variable "on the fly"
+          echo "TRIAGE_TEAM_STRING=$TRIAGE_TEAM_STRING" >> $GITHUB_ENV
+      - name: Send to the board
         uses: peter-evans/create-or-update-project-card@v2
+        if: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.event.*.user.login)) }}
         with:
           project-name: Support
           # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-          column-name: ${{ (contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'From Bitnami' || 'Triage' }}
+          column-name: 'Solved'
           token: "${{ secrets.GHPROJECT_TOKEN }}"
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
-      - name: Triage labeling
+      - name: Solved labeling
         # Only if moved into Solved
+        if: ${{ github.event.project_card.column_id == env.SOLVED_COLUMN_ID  }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || 'bitnami' }}
+          add-labels: "solved"
+          remove-labels: "in-progress, on-hold, triage"

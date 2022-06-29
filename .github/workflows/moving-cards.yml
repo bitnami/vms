@@ -5,11 +5,7 @@ on:
   project_card:
     types:
       - moved
-env:
-  IN_PROGRESS_COLUMN_ID: 18834407
-  TRIAGE_COLUMN_ID: 18834406
-  SOLVED_COLUMN_ID: 18834409
-  ON_HOLD_COLUMN_ID: 18834408
+
 permissions:
   repository-projects: read
   issues: write
@@ -17,6 +13,15 @@ jobs:
   label-card:
     runs-on: ubuntu-latest
     steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Load .env file
+        uses: xom9ikk/dotenv@v1.0.2
+        with:
+          path: .github/workflows/
+      # Now handling the needed labeling
       - name: On hold labeling
         # Only if moved into on hold
         if: ${{ github.event.project_card.column_id == env.ON_HOLD_COLUMN_ID  }}
@@ -41,13 +46,28 @@ jobs:
   assign-assignee-if-needed:
     runs-on: ubuntu-latest
     steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Load .env file
+        uses: xom9ikk/dotenv@v1.0.2
+        with:
+          path: .github/workflows/
+      - name: Preparing string variables
+        run: |
+          SUPPORT_TEAM_STRING=${SUPPORT_TEAM/[/}
+          SUPPORT_TEAM_STRING=${SUPPORT_TEAM_STRING/]/}
+          SUPPORT_TEAM_STRING=${SUPPORT_TEAM_STRING//'"'/}
+          # creating env variable "on the fly"
+          echo "SUPPORT_TEAM_STRING=$SUPPORT_TEAM_STRING" >> $GITHUB_ENV
       - name: Assign to a person to work on it
         # Only if moved into In progress FROM Triage
-        if: ${{ github.event.project_card.column_id == env.IN_PROGRESS_COLUMN_ID  }} && ${{ github.event.project_card.changes != null }} && $ {{ github.event.project_card.changes.column_id }} && $ {{ github.event.project_card.changes.column_id == env.TRIAGE_COLUMN_ID }}
-        uses: pozil/auto-assign-issue@v1.6.3
+        if: ${{ github.event.project_card.column_id == env.IN_PROGRESS_COLUMN_ID && github.event.project_card.changes != null && github.event.project_card.changes.column_id && github.event.project_card.changes.column_id == env.TRIAGE_COLUMN_ID }}
+        uses: pozil/auto-assign-issue@v1.7.3
         with:
           numOfAssignee: 1
-          assignees: 'gongomgra,jotamartos,mdhont,joancafom,dgomezleon'
+          assignees: 'agomezmoron,jotamartos' #${{ env.SUPPORTTEAM_STRING }}
           removePreviousAssignees: true
           # teams: XXX
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
