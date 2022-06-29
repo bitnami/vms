@@ -67,7 +67,7 @@ jobs:
         uses: pozil/auto-assign-issue@v1.7.3
         with:
           numOfAssignee: 1
-          assignees: 'agomezmoron,jotamartos' #${{ env.SUPPORTTEAM_STRING }}
+          assignees: ${{ env.SUPPORTTEAM_STRING }}
           removePreviousAssignees: true
           # teams: XXX
           repo-token: "${{ secrets.GITHUB_TOKEN }}"

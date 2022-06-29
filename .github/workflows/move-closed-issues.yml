@@ -30,7 +30,7 @@ jobs:
           TRIAGE_TEAM_STRING=${TRIAGE_TEAM_STRING//'"'/}
           # creating env variable "on the fly"
           echo "TRIAGE_TEAM_STRING=$TRIAGE_TEAM_STRING" >> $GITHUB_ENV
-      - name: Send to the board
+      - name: Send to the Solved column
         uses: peter-evans/create-or-update-project-card@v2
         if: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.event.*.user.login)) }}
         with:

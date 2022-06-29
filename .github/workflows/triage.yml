@@ -27,7 +27,22 @@ jobs:
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
-      - name: Send to the solved board
+      - name: Preparing string variables
+        run: |
+          TRIAGE_TEAM_STRING=${TRIAGE_TEAM/[/}
+          TRIAGE_TEAM_STRING=${TRIAGE_TEAM_STRING/]/}
+          TRIAGE_TEAM_STRING=${TRIAGE_TEAM_STRING//'"'/}
+          # creating env variable "on the fly"
+          echo "TRIAGE_TEAM_STRING=$TRIAGE_TEAM_STRING" >> $GITHUB_ENV
+      - name: Assign to a person to work on it
+        uses: pozil/auto-assign-issue@v1.7.3
+        with:
+          numOfAssignee: 1
+          assignees: ${{ env.TRIAGE_TEAM_STRING }}
+          removePreviousAssignees: false
+          # teams: XXX
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Send to the board
         uses: peter-evans/create-or-update-project-card@v2
         with:
           project-name: Support
@@ -40,3 +55,5 @@ jobs:
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || 'bitnami' }}
+          # For reopened issues
+          remove-labels: "solved"
