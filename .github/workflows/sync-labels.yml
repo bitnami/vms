@@ -1,0 +1,17 @@
+name: 'Synchronize labels from the charts repository'
+on:
+  schedule:
+    # Hourly
+    - cron: '0 * * * *'
+permissions:
+  issues: write
+
+jobs:
+  sync-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: EndBug/label-sync@v2
+        with:
+          source-repo: bitnami/charts
+          delete-other-labels: false
+          token: ${{ secrets.GITHUB_TOKEN }}
