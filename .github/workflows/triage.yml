@@ -47,6 +47,7 @@ jobs:
           # teams: XXX
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Send to the board
+        if: ${{ github.actor != 'bitnami-bot'  }}
         uses: peter-evans/create-or-update-project-card@v2
         with:
           project-name: Support
