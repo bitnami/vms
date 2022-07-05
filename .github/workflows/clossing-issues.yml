@@ -8,10 +8,6 @@ permissions:
   issues: write
   repository-projects: write
 
-concurrency:
-  group: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
-  cancel-in-progress: false
-
 jobs:
   stale:
     runs-on: ubuntu-latest

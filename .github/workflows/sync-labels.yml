@@ -1,8 +1,8 @@
 name: 'Synchronize labels from the charts repository'
 on:
   schedule:
-    # Hourly
-    - cron: '0 * * * *'
+    # Daily
+    - cron: '0 1 * * *'
 permissions:
   issues: write
 
