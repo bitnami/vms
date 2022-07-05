@@ -9,6 +9,12 @@ on:
 permissions:
   repository-projects: read
   issues: write
+
+concurrency:
+  # Cards are special
+  group: ${{ github.event.project_card.content_url }}
+  cancel-in-progress: false
+
 jobs:
   label-card:
     runs-on: ubuntu-latest

@@ -11,6 +11,10 @@ permissions:
   issues: write
   repository-projects: write
 
+concurrency:
+  group: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
+  cancel-in-progress: false
+
 jobs:
   send_to_solved:
     runs-on: ubuntu-latest
@@ -32,7 +36,6 @@ jobs:
           echo "TRIAGE_TEAM_STRING=$TRIAGE_TEAM_STRING" >> $GITHUB_ENV
       - name: Send to the Solved column
         uses: peter-evans/create-or-update-project-card@v2
-        if: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.event.*.user.login)) }}
         with:
           project-name: Support
           # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
@@ -41,7 +44,6 @@ jobs:
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
       - name: Solved labeling
         # Only if moved into Solved
-        if: ${{ github.event.project_card.column_id == env.SOLVED_COLUMN_ID  }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: "solved"

@@ -14,6 +14,10 @@ permissions:
   repository-projects: write
   issues: write
 
+concurrency:
+  group: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
+  cancel-in-progress: false
+
 jobs:
   # For any opened or reopened issue, should be sent into Triage
   send_to_board:
