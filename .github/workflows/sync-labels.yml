@@ -1,4 +1,4 @@
-name: 'Synchronize labels from the charts repository'
+name: '[Support] Synchronize labels from the charts repository'
 on:
   schedule:
     # Daily
