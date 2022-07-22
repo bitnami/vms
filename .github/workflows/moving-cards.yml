@@ -1,5 +1,4 @@
 # This workflow is built to manage the triage support by using GH issues.
-
 name: '[Support] Cards movements'
 on:
   project_card:
@@ -10,13 +9,14 @@ permissions:
   repository-projects: read
   issues: write
 
+# To fix the concurrency when for example more than one label is added
 concurrency:
-  # Cards are special
-  group: ${{ github.event.project_card.content_url }}
+  group: ${{ github.run_id }}
   cancel-in-progress: false
 
 jobs:
   label-card:
+    if: ${{ github.actor != 'bitnami-bot' && github.event.pull_request && (!contains(github.event.pull_request.labels.*.name, 'auto-merge')) }}
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
@@ -33,6 +33,7 @@ jobs:
         if: ${{ github.event.project_card.column_id == env.ON_HOLD_COLUMN_ID  }}
         uses: andymckay/labeler@1.0.4
         with:
+          repo-token: "${{ secrets.GHPROJECT_TOKEN }}"
           add-labels: "on-hold"
           remove-labels: "triage"
       - name: In progress labeling
@@ -40,6 +41,7 @@ jobs:
         if: ${{ github.event.project_card.column_id == env.IN_PROGRESS_COLUMN_ID  }}
         uses: andymckay/labeler@1.0.4
         with:
+          repo-token: "${{ secrets.GHPROJECT_TOKEN }}"
           add-labels: "in-progress"
           remove-labels: "on-hold, triage"
       - name: Solved labeling
@@ -47,9 +49,11 @@ jobs:
         if: ${{ github.event.project_card.column_id == env.SOLVED_COLUMN_ID  }}
         uses: andymckay/labeler@1.0.4
         with:
+          repo-token: "${{ secrets.GHPROJECT_TOKEN }}"
           add-labels: "solved"
           remove-labels: "in-progress, on-hold, triage"
   assign-assignee-if-needed:
+    if: ${{ github.actor != 'bitnami-bot' && (!contains(github.event.issue.labels.*.name, 'auto-merge')) }}
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
