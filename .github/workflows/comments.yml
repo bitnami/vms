@@ -49,7 +49,7 @@ jobs:
       - name: Label as triage back
         # Only if commented when solved
         if: ${{ contains(github.event.issue.labels.*.name, 'solved') }}
-        uses: andymckay/labeler@1.0.4
+        uses: fmulero/labeler@1.0.5
         with:
           add-labels: "triage"
           remove-labels: "solved"
