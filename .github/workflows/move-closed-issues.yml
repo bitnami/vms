@@ -39,7 +39,7 @@ jobs:
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
       - name: Solved labeling
         # Only if moved into Solved
-        uses: andymckay/labeler@1.0.4
+        uses: fmulero/labeler@1.0.5
         with:
           repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
           add-labels: "solved"
