@@ -6,41 +6,30 @@ on:
   pull_request_target:
     types:
       - closed
-
 permissions:
-  issues: write
   repository-projects: write
-
-# To fix the concurrency when for example more than one label is added
+# Avoid concurrency over the same issue
 concurrency:
-  group: ${{ github.run_id }}
-  cancel-in-progress: false
-
+  group: card-movement-${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
 jobs:
   send_to_solved:
-    if: ${{ github.actor != 'bitnami-bot' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Repo checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - name: Load .env file
-        uses: xom9ikk/dotenv@v2
-        with:
-          path: .github/workflows/
       - name: Send to the Solved column
+        id: send-solved
         uses: peter-evans/create-or-update-project-card@v2
         with:
           project-name: Support
-          # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
           column-name: 'Solved'
           token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
-      - name: Solved labeling
-        # Only if moved into Solved
-        uses: fmulero/labeler@1.0.5
+      - name: Remove cards from automated PRs
+        if: |
+          (github.event.issue != null && github.event.issue.user.login == 'bitnami-bot') ||
+          (github.event.issue == null && github.event.pull_request.user.login == 'bitnami-bot')
+        uses: actions/github-script@v6
         with:
-          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
-          add-labels: "solved"
-          remove-labels: "in-progress, on-hold, triage"
+          script: |
+            github.rest.projects.deleteCard({
+              card_id: ${{ steps.send-solved.outputs.card-id }}
+            });
