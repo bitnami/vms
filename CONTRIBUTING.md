@@ -12,8 +12,9 @@ Any type of contribution is welcome: new features, bug fixes, documentation impr
 ### Requirements
 
 When submitting a PR make sure that:
+
 - It must pass CI jobs for linting and test the changes (if any).
-- The title of the PR is clear enough and starts with "[bitnami/<vm-name>]"
+- The title of the PR is clear enough and starts with "[bitnami/vm-name]"
 - If necessary, add information to the repository's `README.md`.
 
 #### Sign Your Work
@@ -30,14 +31,14 @@ If you set your `user.name` and `user.email` git configs, you can sign your comm
 
 Note: If your git config information is set properly then viewing the `git log` information for your commit will look something like this:
 
-```
-Author: Joe Smith <joe.smith@example.com>
-Date:   Thu Feb 2 11:41:15 2018 -0800
+    ```text
+    Author: Joe Smith <joe.smith@example.com>
+    Date:   Thu Feb 2 11:41:15 2018 -0800
 
-    Update README
+        Update README
 
-    Signed-off-by: Joe Smith <joe.smith@example.com>
-```
+        Signed-off-by: Joe Smith <joe.smith@example.com>
+    ```
 
 Notice the `Author` and `Signed-off-by` lines match. If they don't your PR will be rejected by the automated DCO check.
 

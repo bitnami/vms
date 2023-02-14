@@ -1,6 +1,7 @@
-# Bitnami Application Catalog VMs  
+# Bitnami Application Catalog VMs
 
 [Popular applications](https://bitnami.com/stacks), provided by [Bitnami](https://bitnami.com), ready to launch on:
+
 * [VMware Marketplace](https://marketplace.cloud.vmware.com/)
 * [GCP Marketplace](https://bitnami.com/partners/google)
 * [AWS Marketplace](https://bitnami.com/partners/aws)
@@ -20,6 +21,7 @@ If the documentation didn't help you, we strongly suggest you to check the [reso
 There is an updated documentation at [docs.bitnami.com](https://docs.bitnami.com/) where you can find tutorials and FAQs.
 
 You can have important information about a Cloud provider:
+
 * [AWS](https://docs.bitnami.com/aws/)
 * [GCP](https://docs.bitnami.com/google/)
 * [Azure](https://docs.bitnami.com/azure/)
