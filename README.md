@@ -5,7 +5,6 @@
 * [GCP Marketplace](https://bitnami.com/partners/google)
 * [AWS Marketplace](https://bitnami.com/partners/aws)
 * [Azure Marketplace](https://bitnami.com/partners/azure)
-* [IBM](https://cloud.ibm.com/catalog?search=Bitnami#search_results)
 * Any VM using [OVA](https://bitnami.com/stacks/virtual-machine) files.
 
 ## Before creating an issue
@@ -24,7 +23,6 @@ You can have important information about a Cloud provider:
 * [AWS](https://docs.bitnami.com/aws/)
 * [GCP](https://docs.bitnami.com/google/)
 * [Azure](https://docs.bitnami.com/azure/)
-* [IBM](https://docs.bitnami.com/ibm/)
 * [VMware Marketplace](https://docs.bitnami.com/vmware-marketplace/)
 
 ### Bitnami charts
