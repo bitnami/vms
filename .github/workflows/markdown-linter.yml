@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Install mardownlint
         run: npm install -g markdownlint-cli@0.33.0
-      - name: Checkout bitnami/charts
+      - name: Checkout project
         uses: actions/checkout@v3
       - name: Execute markdownlint
         run: |
