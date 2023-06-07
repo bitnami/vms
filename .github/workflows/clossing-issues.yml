@@ -3,11 +3,8 @@ on:
   schedule:
     # Hourly
     - cron: '0 * * * *'
-
-permissions:
-  issues: write
-  repository-projects: write
-
+# Remove all permissions by default. Actions are performed by Bitnami Bot
+permissions: {}
 jobs:
   stale:
     runs-on: ubuntu-latest
@@ -18,4 +15,4 @@ jobs:
           stale-issue-label: 'solved'
           days-before-stale: 0
           days-before-close: 0
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          repo-token: ${{ secrets.BITNAMI_BOT_TOKEN }}
