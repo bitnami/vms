@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 name: '[Support] Synchronize labels from the containers repository'
 on:
   workflow_dispatch:
@@ -14,7 +17,7 @@ jobs:
       # Required to read issues from bitnami/containers
       contents: read
     steps:
-      - uses: EndBug/label-sync@v2
+      - uses: EndBug/label-sync@6ba4d3eb919c51aa5b8bf4d574b2161960a9edd3
         with:
           source-repo: bitnami/containers
           delete-other-labels: false
