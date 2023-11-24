@@ -6,8 +6,8 @@ on:
   issue_comment:
     types:
       - created
-# Remove all permissions by default
 permissions:
+  contents: read
   pull-requests: write
   issues: write
 jobs:
