@@ -17,7 +17,7 @@ jobs:
       # Required to read issues from bitnami/containers
       contents: read
     steps:
-      - uses: EndBug/label-sync@6ba4d3eb919c51aa5b8bf4d574b2161960a9edd3
+      - uses: EndBug/label-sync@6953e556117ba9e34ba4338952afea24379e85bd
         with:
           source-repo: bitnami/containers
           delete-other-labels: false
