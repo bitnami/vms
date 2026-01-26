@@ -11,7 +11,7 @@ body:
           - Look for your issue in the [resolved ones](https://github.com/bitnami/vms/issues?q=is%3Aissue+is%3Aclosed), maybe we solved similar issues before.
           - If you didn't find in the resolved ones, we suggest you to look on the [on going ones](https://github.com/bitnami/vms/issues).
         
-        If that information didn't help you, please fill in as much of the following form as you are able (and ensure you have your [bndiagnostic ID](https://docs.bitnami.com/general/how-to/understand-bndiagnostic/)).
+        If that information didn't help you, please fill in as much of the following form as you are able.
         
         Please ensure the ticket title contains the proper application name (ex: [wordpress] Your title here).
   - type: dropdown
@@ -27,33 +27,6 @@ body:
         - Virtual Machine
         - OSX VM
         - Installers
-    validations:
-      required: true
-  - type: input
-    id: bndiagnosticID
-    attributes:
-      label: bndiagnostic ID [know more about bndiagnostic ID](https://docs.bitnami.com/general/how-to/understand-bndiagnostic/)
-      placeholder: ex. 849fabe0-d11f-11cb-4a34-e4ec5361be461
-    validations:
-      required: true
-  - type: textarea
-    id: bndiagnosticOutput
-    attributes:
-      label: bndiagnostic output
-      description: Enter output a summarized output of the tool (please, ensure there is no sensitive data)
-      placeholder: |
-        ? Apache: Found possible issues
-        ? Connectivity: Found possible issues
-        ? Resources: Found possible issues
-          https://docs.bitnami.com/general/apps/wordpress/troubleshooting/debug-errors-apache/
-          https://docs.bitnami.com/general/faq/administration/use-firewall/
-    validations:
-      required: false
-  - type: input
-    id: bndiagnosticReason
-    attributes:
-      label: bndiagnostic was not useful. Could you please tell us why?
-      placeholder: ex. The suggested guides are not related with my issue
     validations:
       required: true
   - type: textarea
